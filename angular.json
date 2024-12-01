@@ -20,9 +20,7 @@
             "outputPath": "dist/micro-app-one",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -31,13 +29,15 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "outputPath": {
+                "base": "dist/micro-app-one",
+                "browser": ""
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -50,12 +50,13 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "none"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "outputHashing": "none"
             }
           },
           "defaultConfiguration": "production"
@@ -64,10 +65,13 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "micro-app-one:build:production"
+              "buildTarget": "micro-app-one:build:production",
+              "port": 4210
             },
             "development": {
-              "buildTarget": "micro-app-one:build:development"
+              "buildTarget": "micro-app-one:build:development",
+              "port": 4210,
+              "allowedHosts": ["localhost"]
             }
           },
           "defaultConfiguration": "development"
@@ -78,10 +82,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -90,9 +91,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         }

@@ -1,6 +1,12 @@
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { createCustomElement } from '@angular/elements';
+import { createApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 
-bootstrapApplication(AppComponent, appConfig)
+createApplication()
+  .then((app) => {
+    const MyComponent = createCustomElement(AppComponent, {
+      injector: app.injector,
+    });
+    customElements.define('app-one', MyComponent);
+  })
   .catch((err) => console.error(err));
